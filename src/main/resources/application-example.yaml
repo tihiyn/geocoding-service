@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: geocoding-service
+  kafka:
+    bootstrap-servers:
+    consumer:
+      group-id: geocoding-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: com.example.geocodingservice.dto.TripRawNotification
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+
+geoapify:
+  api:
+    key:
+    url: https://api.geoapify.com/v1/geocode/reverse?
